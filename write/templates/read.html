@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
+    <meta charset="utf-8">
+    <title>
+        Коллективный разум
+    </title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Коллективный разум</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/write/">Написать<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/read/">Читать</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container" style="margin-top: 15px;">
+    <div class="card" style="width: 46rem">
+    <div class="card-body">
+    <div class="page-header">
+        <h1>Алиса в стране чудес</h1>
+    </div>
+    {% if claim.end  %}
+        {% for claim in claims %}
+        <div class="card" style="width: 46rem">
+            <div class="card-body">
+                <p><b><div class="page-header">{{ claim.name }}</div></b></p>
+                <p><div class="page-header">{{ claim.text }} </div></p>
+                <p class="text-muted">{{ claim.author }}</p>
+                <b>Время:</b>{{claim.time|date:'Y-m-d H:i'}}
+        </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <a href='/write' class="btn btn-success btn-lg" role="button">Написать рассказ</a>
+            <a href='/' class="btn btn-danger btn-lg" role="button">Назад</a>
+        </p>
+    </form>
+
+</div>
+</div>
+</body>
+</html>
